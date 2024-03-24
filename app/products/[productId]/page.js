@@ -36,7 +36,7 @@ const ProductPage = ({ params: { productId } }) => {
                 {product?.images &&
                   product?.images.map((imgUrl) => (
                     <>
-                      <img
+                      <Image
                         src={`${imgUrl}`}
                         width={100}
                         height={100}
