@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const Page = ({ params: { productId } }) => {
-    
+const ProductPage = ({ params: { productId } }) => {
+
   const [imgUrl, setImgUrl] = useState("");
 
   productId = parseInt(productId, 10);
@@ -91,4 +91,4 @@ const Page = ({ params: { productId } }) => {
   );
 };
 
-export default Page;
+export default ProductPage;

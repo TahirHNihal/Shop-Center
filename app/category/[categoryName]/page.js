@@ -4,7 +4,7 @@ import Product from "@/components/Product";
 import products from "@/data/data";
 import { useEffect, useState } from "react";
 
-const page = ({ params: { categoryName } }) => {
+const CategoryPage = ({ params: { categoryName } }) => {
   const [catProducts, setCatProducts] = useState(products);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const page = ({ params: { categoryName } }) => {
   );
 };
 
-export default page;
+export default CategoryPage;
