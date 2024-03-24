@@ -57,13 +57,20 @@ const ProductPage = ({ params: { productId } }) => {
                 </Link>
               </span>
               <div className="mt-3 flex items-center justify-start gap-1">
-                {product?.rating}
-                <Image
-                  src="/assets/svg/star.svg"
-                  width={20}
-                  height={20}
-                  alt="star icon"
-                />
+                <div>({product?.rating})</div>
+                {/* Displaying star icons on product rating */}
+                {Array.from(
+                  { length: Math.ceil(product?.rating) },
+                  (_, index) => (
+                    <Image
+                      src="/assets/svg/star.svg"
+                      key={index}
+                      width={20}
+                      height={20}
+                      alt="star icon"
+                    />
+                  )
+                )}
               </div>
               <hr className="my-5 bg-black" />
 
