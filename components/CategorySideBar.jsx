@@ -6,7 +6,6 @@ const CategorySideBar = () => {
   const router = useRouter();
   const handleCategory = (e) => {
     let value = e.target.value;
-    console.log(value);
     router.push(`/category/${value}`);
   };
   return (

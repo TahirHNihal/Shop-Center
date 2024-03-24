@@ -5,19 +5,19 @@ import Link from "next/link";
 import { useState } from "react";
 
 const ProductPage = ({ params: { productId } }) => {
-
   const [imgUrl, setImgUrl] = useState("");
 
   productId = parseInt(productId, 10);
   const product = products.filter((product) => product.id === productId)[0];
 
-  if (product?.length === 0) {
+  if (!product) {
     return <div>Product not found</div>;
   }
-  const handleProductImage = (imgUrl) => {
-    setImgUrl(imgUrl.target.currentSrc);
-    // console.log(imgUrl.target.currentSrc);
+
+  const handleProductImage = (imageUrl) => {
+    setImgUrl(imageUrl);
   };
+
   return (
     <>
       <main className="h-screen">
@@ -34,17 +34,16 @@ const ProductPage = ({ params: { productId } }) => {
 
               <div className="flex gap-4 mt-4">
                 {product?.images &&
-                  product?.images.map((imgUrl) => (
-                    <>
-                      <Image
-                        src={`${imgUrl}`}
-                        width={100}
-                        height={100}
-                        className="w-[100px] h-[100px] mx-auto border object-cover cursor-pointer"
-                        alt="product image"
-                        onClick={(imgUrl) => handleProductImage(imgUrl)}
-                      />
-                    </>
+                  product?.images.map((img) => (
+                    <Image
+                      key={img}
+                      src={img}
+                      width={100}
+                      height={100}
+                      className="w-[100px] h-[100px] mx-auto border object-cover cursor-pointer"
+                      alt="product image"
+                      onClick={() => handleProductImage(img)}
+                    />
                   ))}
               </div>
             </div>
