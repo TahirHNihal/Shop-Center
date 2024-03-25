@@ -1,6 +1,13 @@
+import { getOriginalPrice } from "@/utils/app";
 import Link from "next/link";
 
 const Product = ({ product }) => {
+
+  const originalPrice = getOriginalPrice(
+    product?.price,
+    product?.discountPercentage
+  );
+  
   return (
     <>
       <div>
@@ -26,8 +33,8 @@ const Product = ({ product }) => {
         <p className="text-[#919090] text-sm ">{product?.description}</p>
 
         <p className="text-rose-600 text-sm mt-4">
-          {/* <span className="text-[#919090] line-through">$205.00</span>  */}$
-          {product?.price}
+          <span className="text-[#919090] line-through">${originalPrice}</span>{" "}
+          ${product?.price}
         </p>
       </div>
     </>

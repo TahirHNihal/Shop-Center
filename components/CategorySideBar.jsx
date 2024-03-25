@@ -1,54 +1,43 @@
 "use client";
 
+import products from "@/data/data";
+import { getCapitalizeFirstLetter } from "@/utils/app";
 import { usePathname, useRouter } from "next/navigation";
 
 const CategorySideBar = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleCategory = (e) => {
-    let value = e.target.value;
-    router.push(`/category/${value}`);
+  const categories = [
+    "all",
+    ...new Set(products.map((product) => product.category)),
+  ];
+
+  const handleCategory = (category) => {
+    if (category === "all") {
+      router.push(`/category/all`);
+    } else {
+      router.push(`/category/${category}`);
+    }
   };
+
   return (
     <>
       <div className="w-full flex items-center justify-between lg:block lg:w-2/12 my-10 lg:my-0 lg:mt-4">
-        <button
-          className={`hover:border-b border-black block h-6 box-border mt-4 ${
-            pathname === "/category/all" ? "active" : ""
-          }`}
-          value={"all"}
-          onClick={(e) => handleCategory(e)}
-        >
-          All
-        </button>
-        <button
-          className={`hover:border-b border-black block h-6 box-border mt-4 ${
-            pathname === "/category/smartphones" ? "active" : ""
-          }`}
-          value={"smartphones"}
-          onClick={(e) => handleCategory(e)}
-        >
-          Smartphones
-        </button>
-        <button
-          className={`hover:border-b border-black block h-6 box-border mt-4 ${
-            pathname === "/category/laptops" ? "active" : ""
-          }`}
-          value={"laptops"}
-          onClick={(e) => handleCategory(e)}
-        >
-          Laptops
-        </button>
-        <button
-          className={`hover:border-b border-black block h-6 box-border mt-4 ${
-            pathname === "/category/fragrances" ? "active" : ""
-          }`}
-          value={"fragrances"}
-          onClick={(e) => handleCategory(e)}
-        >
-          Fragrances
-        </button>
+        {categories.map((category, index) => (
+          <button
+            key={index}
+            className={`hover:border-b border-black block h-6 box-border mt-4 ${
+              pathname === `/category/${category ? category : "all"}`
+                ? "active"
+                : ""
+            }`}
+            value={category}
+            onClick={() => handleCategory(category)}
+          >
+            {getCapitalizeFirstLetter(category)}
+          </button>
+        ))}
       </div>
     </>
   );

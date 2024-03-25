@@ -1,5 +1,6 @@
 "use client";
 import products from "@/data/data";
+import { getOriginalPrice } from "@/utils/app";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,6 +18,11 @@ const ProductPage = ({ params: { productId } }) => {
   const handleProductImage = (imageUrl) => {
     setImgUrl(imageUrl);
   };
+
+  const originalPrice = getOriginalPrice(
+    product?.price,
+    product?.discountPercentage
+  );
 
   return (
     <>
@@ -76,9 +82,9 @@ const ProductPage = ({ params: { productId } }) => {
 
               <div>
                 <p className="my-3">
-                  {/* <span className="text-rose-600 opacity-60 line-through">
-                    $205.00
-                  </span> */}
+                  <span className="text-rose-600 opacity-60 line-through">
+                    ${originalPrice}
+                  </span>{" "}
                   <span className="font-bold text-2xl">${product?.price}</span>
                 </p>
               </div>
